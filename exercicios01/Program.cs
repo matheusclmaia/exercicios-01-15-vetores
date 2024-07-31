@@ -7,45 +7,47 @@ using System.Security.Cryptography.X509Certificates;
 using System.Xml.Linq;
 internal class Program
 {
-    // Numero 5
+    // Numero 6
 
-    //Fazer um programa para ler um vetor de N números inteiros. Em seguida,
-    // - mostrar na tela a média aritmética somente dos números pares lidos.
+    //Fazer um programa para ler um conjunto de nomes de pessoas e suas respectivas idades. Depois, mostrar na tela o nome
+    //da pessoa mais velha.
+    // Entrada: 5
+    //Joao 16
+    //Maria 21
+    //Teresa 15
+    //Carlos 23
+    //Paulo 17
 
-    //Entrada
-    // 6 
-    // 8 2 11 14 13 20 
-
-    //Saída
-    // 11.0
-
+    // Saída: Pessoa mais velha: Carlos
 
     private static void Main(string[] args)
     {
-        int N, contador =0;
-        string[] vet;
-        double[] elementos;
-        double media=0;
+        int N, minimo = int.MinValue;
+        int[] idade;
+        string[] nome, vet;
+        string velho="sem nome";
 
         N = int.Parse(Console.ReadLine());
-        elementos = new double[N];
-        vet = Console.ReadLine().Split(' ');
+        idade = new int[N];
+        nome = new string[N];
 
-        for (int i = 0; i < N; i++)
+        for (int i = 0; i<N;i++)
         {
-            elementos[i] = double.Parse(vet[i],CultureInfo.InvariantCulture);
+            vet = Console.ReadLine().Split(' ');
+            nome[i] = vet[0];
+            idade[i] = int.Parse(vet[1]);
+            
         }
         for (int i = 0; i < N; i++)
         {
-            if (elementos[i] % 2 == 0)
+            if (idade[i] > minimo)
             {
-                media = media + elementos[i];
-                contador++;
+                minimo = idade[i];
+                velho = nome[i];
             }
         }
-        media = media / contador;
 
-        Console.WriteLine(media.ToString("F1",CultureInfo.InvariantCulture));
+        Console.WriteLine("Pessoa mais velha: " + velho);
 
 
         Console.ReadKey();
