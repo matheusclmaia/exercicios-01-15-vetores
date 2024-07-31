@@ -3,59 +3,83 @@ using System.Globalization;
 using System.Net;
 using System.Net.Http.Headers;
 using System.Runtime.ConstrainedExecution;
+using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Xml.Linq;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 internal class Program
 {
-    // Numero 7
+    // Numero 8
 
-    //Fazer um programa para ler um conjunto de N nomes de alunos, bem como as notas que eles tiraram no 1º e 2º semestres. 
-    //Cada uma dessas informações deve ser armazenada em um vetor.Depois, imprimir os nomes dos alunos aprovados,
-    //considerando aprovados aqueles cuja média das notas seja maior ou igual a seis.
+    //Tem-se um conjunto de dados contendo a altura e o sexo (M, F) de N pessoas. Fazer um programa que calcule e escreva:
+    // a maior e a menor altura do grupo
+    // a média de altura das mulheres
+    // o número de homens
 
-    //Entrada:  4
-    //Joao  7.0  8.5 
-    //Maria  9.2  6.5 
-    //Carlos  5.0  6.0 
-    //Teresa  5.5  6.5 
+    //Entrada:  5
+    //1.70 F
+    //1.83 M
+    //1.54 M
+    //1.61 F
+    //1.75 F
 
     // Saída
-    //Alunos aprovados: 
-    //Joao
-    //Maria
-    //Teresa
+    //Menor altura = 1.54
+    //Maior altura = 1.83
+    //Media das alturas das mulheres = 1.69
+    //Numero de homens = 2
+
 
     private static void Main(string[] args)
     {
-        int N;
-        double[] nota1, nota2, media;
-        string[] vet, nome;
-
-        N = int.Parse(Console.ReadLine());
-        nota1 = new double[N];
-        nota2 = new double[N];
-        media = new double[N];
-        nome = new string[N];
-
+        int N, homens=0, mulher=0;
+        double menor = double.MaxValue , maior = double.MinValue, mediamulheres=0;
+        double[] altura;
+        string[] sexo, vet;
         
+      
+        N = int.Parse(Console.ReadLine());
+
+        altura = new double[N];
+        sexo   = new string[N];
+
         for (int i = 0; i < N; i++)
         {
             vet = Console.ReadLine().Split(' ');
-            nome[i] = vet[0];
-            nota1[i] = double.Parse(vet[1], CultureInfo.InvariantCulture);
-            nota2[i] = double.Parse(vet[2], CultureInfo.InvariantCulture);
-            media[i] = (nota1[i] + nota2[i])/2;
-            
+            altura[i] = double.Parse(vet[0], CultureInfo.InvariantCulture);
+            sexo[i] = vet[1];
         }
+        for (int i =0; i < N ; i++)
+        { 
 
-        Console.WriteLine("Alunos aprovados:");
-        for (int i = 0; i < N; i++) 
-        {
-           if (media[i] >= 6)
+            //Menor altura
+            if (altura[i] < menor)
             {
-                Console.WriteLine(nome[i]);
+                menor = altura[i];
+            }
+            //Maior altura
+            if (altura[i] > maior)
+            {
+                maior = altura[i];
+            }
+            // Altura media das mulheres
+            if (sexo[i] == "F")
+            {
+                mediamulheres += altura[i];
+                mulher++;
+            }
+            // Quantidade de homens
+            if (sexo[i] == "M")
+            {
+                homens++;
             }
         }
+        mediamulheres = mediamulheres / mulher;
+
+        Console.WriteLine("Menos altura = " + menor.ToString("F2",CultureInfo.InvariantCulture));
+        Console.WriteLine("Maior altura = " + maior.ToString("F2", CultureInfo.InvariantCulture));
+        Console.WriteLine("Media das alturas das Mulheres = " + mediamulheres.ToString("F2", CultureInfo.InvariantCulture));
+        Console.WriteLine("Numero de Homens = " + homens);
 
 
         Console.ReadKey();
