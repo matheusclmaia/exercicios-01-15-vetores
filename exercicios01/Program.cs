@@ -1,47 +1,49 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Globalization;
+using System.Net;
+using System.Runtime.ConstrainedExecution;
+using System.Security.Cryptography.X509Certificates;
+using System.Xml.Linq;
 internal class Program
 {
-    //Faça um programa que leia N números inteiros e armazene-os em um vetor.Em seguida, mostre na tela:
-    //- todos os números pares
-    //- a quantidade de números pares
-    //Exemplos:
-    //Entrada: 6  -  8 2 11 14 13 20
-    //Saida    8 2 14 20    -    4
+    //Faça um programa para ler dois vetores A e B, contendo N elementos cada.Em seguida, gere um terceiro vetor C onde
+    //cada elemento de C é a soma dos elementos correspondentes de A e B.Imprima o vetor C gerado.
+    //Entrada
+    //6
+    //8 2 11 14 13 20
+    //5 10 3 1 10 7
+
+    //Saída
+    //13 12 14 15 23 27
+
+
     private static void Main(string[] args)
     {
-        int N,contagem=0,m=0;
+        int N;
         string[] vet;
-        int[] valores, pares;
+        int[] valor1, valor2, resultado;
 
         N = int.Parse(Console.ReadLine());
-        valores = new int[N];
-
+        valor1 = new int[N];
+        valor2 = new int[N];
+        resultado = new int[N];
         vet = Console.ReadLine().Split(' ');
 
         for (int i = 0; i < N; i++)
         {
-            valores[i] = int.Parse(vet[i]);
-            if (valores[i] % 2 == 0)
-            { 
-            contagem++;
-            }
+            valor1[i] = int.Parse(vet[i]);
         }
-        
-        pares = new int[contagem];
+        vet = Console.ReadLine().Split(' ');
 
         for (int i = 0; i < N; i++)
         {
-            if (valores[i] % 2 == 0)
-            { 
-            pares[m] = valores[i];
-            Console.Write(pares[m]+ " ");
-            m++;
-            }
+            valor2[i] = int.Parse(vet[i]);
         }
-        Console.WriteLine("\n"+contagem);
-
-
+        for (int i = 0; i < N; i++)
+        {
+            resultado[i] = valor1[i] + valor2[i];
+            Console.Write(resultado[i]+ " ");
+        }
 
         Console.ReadKey();
     }
