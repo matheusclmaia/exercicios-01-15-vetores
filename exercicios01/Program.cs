@@ -2,44 +2,44 @@
 using System.Globalization;
 internal class Program
 {
-    //Faça um programa que leia N números reais e armazene-os em um vetor.Em seguida, 
-    //mostrar na tela o maior número do vetor(supor não haver empates).Mostrar também a posição do maior elemento.
-    
-    //Exemplo:
-   
-    //Entrada : 6   -   8.0 4.0 10.0 14.0 13.0 7.0
-    
-    //Saída: 14.0  3
-
+    //Faça um programa que leia N números inteiros e armazene-os em um vetor.Em seguida, mostre na tela:
+    //- todos os números pares
+    //- a quantidade de números pares
+    //Exemplos:
+    //Entrada: 6  -  8 2 11 14 13 20
+    //Saida    8 2 14 20    -    4
     private static void Main(string[] args)
     {
-        int N, local=0;
+        int N,contagem=0,m=0;
         string[] vet;
-        double[] valores;
-        double minimo = double.MinValue;
+        int[] valores, pares;
 
         N = int.Parse(Console.ReadLine());
-        valores = new double[N];
+        valores = new int[N];
+
         vet = Console.ReadLine().Split(' ');
 
-
         for (int i = 0; i < N; i++)
         {
-            valores[i] = double.Parse(vet[i],CultureInfo.InvariantCulture);
-            Console.WriteLine(valores[i].ToString("F2"), CultureInfo.InvariantCulture);
-        }
-
-        for (int i = 0; i < N; i++)
-        {
-            if (valores[i] > minimo)
-            {
-                minimo = valores[i];
-                local = i;
+            valores[i] = int.Parse(vet[i]);
+            if (valores[i] % 2 == 0)
+            { 
+            contagem++;
             }
         }
+        
+        pares = new int[contagem];
 
-        Console.WriteLine(minimo.ToString("F1"), CultureInfo.InvariantCulture);
-        Console.WriteLine(local);
+        for (int i = 0; i < N; i++)
+        {
+            if (valores[i] % 2 == 0)
+            { 
+            pares[m] = valores[i];
+            Console.Write(pares[m]+ " ");
+            m++;
+            }
+        }
+        Console.WriteLine("\n"+contagem);
 
 
 
