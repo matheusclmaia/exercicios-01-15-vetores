@@ -7,54 +7,45 @@ using System.Security.Cryptography.X509Certificates;
 using System.Xml.Linq;
 internal class Program
 {
-    // Numero 4
+    // Numero 5
 
-    //Fazer um programa para ler um vetor de N números reais. Em seguida,
-    //- Mostrar na tela a média aritmética de todos elementos
-    //- Depois mostrar todos os elementos do vetor que estejam abaixo da média.
+    //Fazer um programa para ler um vetor de N números inteiros. Em seguida,
+    // - mostrar na tela a média aritmética somente dos números pares lidos.
 
     //Entrada
-    //4
-    //10.0 15.5 13.2 9.8
+    // 6 
+    // 8 2 11 14 13 20 
 
     //Saída
-    //12.125
-    //10.0
-    //9.8
+    // 11.0
 
 
     private static void Main(string[] args)
     {
-        int N;
+        int N, contador =0;
         string[] vet;
         double[] elementos;
-        double media = 0.0;
+        double media=0;
 
         N = int.Parse(Console.ReadLine());
         elementos = new double[N];
         vet = Console.ReadLine().Split(' ');
 
-        for (int i = 0; i < N; i++) 
+        for (int i = 0; i < N; i++)
         {
-            elementos[i] = double.Parse(vet[i], CultureInfo.InvariantCulture);
-            media = media + elementos[i];
+            elementos[i] = double.Parse(vet[i],CultureInfo.InvariantCulture);
         }
-        media = media / N;
-        Console.WriteLine(media);
-        
-        for (int i = 0; i< N; i++)
+        for (int i = 0; i < N; i++)
         {
-            if (elementos[i] < media)
+            if (elementos[i] % 2 == 0)
             {
-                Console.WriteLine(elementos[i].ToString("F1"), CultureInfo.InvariantCulture);
+                media = media + elementos[i];
+                contador++;
             }
         }
+        media = media / contador;
 
-
-
-
-
-
+        Console.WriteLine(media.ToString("F1",CultureInfo.InvariantCulture));
 
 
         Console.ReadKey();
